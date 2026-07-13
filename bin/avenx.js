@@ -892,8 +892,8 @@ class AvenxCLI {
    */
   printHelp() {
     console.log(`
-Avenx-JS CLI
-Usage: avenx <command> [type] [name]
+\x1b[1;36mAvenx-JS CLI\x1b[0m
+\x1b[1mUsage:\x1b[0m \x1b[32mavenx\x1b[0m \x1b[90m<command> [type] [name]\x1b[0m
 
 Commands:
   init                      Initialize a new Avenx project structure
