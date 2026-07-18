@@ -599,7 +599,7 @@ function testReactivityEncapsulation() {
   const state = new StateFactory().create(rawObj);
 
   // Trigger proxy creation for nested object
-  const b = state.b;
+  state.b;
 
   const rawInner = rawObj.b;
 

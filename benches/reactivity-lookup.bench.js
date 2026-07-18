@@ -1,10 +1,15 @@
+/* eslint-disable camelcase */
 import assert from 'assert';
 import { performance } from 'perf_hooks';
 import '../test/helpers/register-happy-dom.js';
 import { AvenxComponent } from '../lib/core/runtime/AvenxComponent.js';
 import { RAW_SYMBOL, PROXY_REF_SYMBOL } from '../lib/core/reactive/proxyHandler.js';
 
-// Helper to generate 10,000 nested array elements
+/**
+ * Helper to generate nested array elements.
+ * @param {number} count - Number of elements to generate.
+ * @returns {Array<object>} Generated nested array elements.
+ */
 function createNestedItems(count) {
   const items = [];
   for (let i = 0; i < count; i++) {
@@ -25,6 +30,11 @@ const count = 10000;
 const iterations = 30;
 const trials = 5;
 
+/**
+ * Runs the reactivity lookup benchmark with or without symbol optimization.
+ * @param {boolean} bypassSymbol - Whether to bypass Symbol optimization and use WeakMap lookup.
+ * @returns {number} Minimum execution time across trials.
+ */
 function runBenchmark(bypassSymbol) {
   // Set the global bypass flag
   globalThis.__avenx_bypass_symbol__ = bypassSymbol;
@@ -47,9 +57,9 @@ function runBenchmark(bypassSymbol) {
   for (let iter = 0; iter < 5; iter++) {
     for (let i = 0; i < count; i++) {
       const item = component.state.items[i];
-      const val1 = item.details.nested.value;
-      const val2 = item.details.title;
-      const val3 = item.index;
+      item.details.nested.value;
+      item.details.title;
+      item.index;
     }
   }
 
@@ -70,9 +80,9 @@ function runBenchmark(bypassSymbol) {
     for (let iter = 0; iter < iterations; iter++) {
       for (let i = 0; i < count; i++) {
         const item = component.state.items[i];
-        const val1 = item.details.nested.value;
-        const val2 = item.details.title;
-        const val3 = item.index;
+        item.details.nested.value;
+        item.details.title;
+        item.index;
       }
     }
     const end = performance.now();
@@ -88,6 +98,9 @@ function runBenchmark(bypassSymbol) {
   return minTime;
 }
 
+/**
+ * Main function to execute the benchmark and assert performance improvements.
+ */
 function main() {
   console.log(`Running Reactivity Lookup Benchmark with nested structure of ${count} array elements...`);
 
